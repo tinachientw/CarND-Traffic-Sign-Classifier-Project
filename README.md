@@ -132,7 +132,7 @@ To train the model, I made the following decisions:
 * Adam optimizer. Adam optimizer uses adaptive decrease of the learning rate. It is quite useful, as it allows the optimizing algorithm to slow down as it approaches solution.
 * Starting learning rate of 0.0009. This choice was motivated by trial and error and also by looking at what practitioners use for this type of optimizer.
 * Batch size of 32. My memory wasn't big enough. I was getting out of memory errors when trying to make this value larger, so I decided to stop at 32.
-* Number of epochs was 201. Since one epoch trained relatively fast (13 seconds on average), I could afford to run it for longer and see if it converges to some value (which it did).
+* Number of epochs was 201. Since one epoch trained relatively fast (12 seconds on average), I could afford to run it for longer and see if it converges to some value (which it did).
 * Use Numba, a JIT compiler, to make Python code fast.
 
 
