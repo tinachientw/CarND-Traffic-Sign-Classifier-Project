@@ -176,8 +176,6 @@ Results can be seen in the figure below.
 
 __4 (Optional): Visualize the Neural Network's State with Test Images__
 
--Featuremap of conv1 Layer, the shape of this layer is 14x14x6 and this featuremap is for stop sign at the next Intersection sign class.
-
 -Featuremap for Pooling layer which is having output shape of 14x14x6.
 <img src="./visualizations/FeatureMap_14x14x6.png">
 
