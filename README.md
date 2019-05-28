@@ -27,13 +27,13 @@ Dependencies
 ---
 This project requires Python 3.5 and the following Python libraries installed:
 
-Jupyter
-NumPy
-SciPy
-scikit-learn
-TensorFlow
-Matplotlib
-Pandas (Optional)
+* Jupyter
+* NumPy
+* SciPy
+* scikit-learn
+* TensorFlow
+* Matplotlib
+* Pandas (Optional)
 Run this command at the terminal prompt to install OpenCV. Useful for image processing:
 
 ```
