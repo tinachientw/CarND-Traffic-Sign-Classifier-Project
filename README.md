@@ -43,7 +43,7 @@ conda install -c https://conda.anaconda.org/menpo opencv3
 
 Data Set Summary & Exploration
 ---
-1. Basic summary of the data set.
+__1. Basic summary of the data set.
 In order to calculate summary statistics for the data set, I used numpy library. The results are as follows:
 
 * The size of training set is 34799 images.
