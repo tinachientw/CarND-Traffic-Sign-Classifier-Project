@@ -43,6 +43,9 @@ conda install -c https://conda.anaconda.org/menpo opencv3
 
 Data Set Summary & Exploration
 ---
+
+Download the [dataset](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic-signs-data.zip). This is a pickled dataset in which we've already resized the images to 32x32.
+
 __1. Basic summary of the data set.
 In order to calculate summary statistics for the data set, I used numpy library. The results are as follows:__
 
