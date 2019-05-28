@@ -46,8 +46,8 @@ Data Set Summary & Exploration
 1. Basic summary of the data set.
 In order to calculate summary statistics for the data set, I used numpy library. The results are as follows:
 
-*The size of training set is 34799 images.
-*The size of the validation set is 4410 images.
-*The size of test set is 12630 images.
-*The shape of a traffic sign image is 32x32x3. This means that each picture is 32 pixels wide, 32 pixels tall, and has 3 color channels.
-*The number of unique classes/labels in the data set is 43.
+* The size of training set is 34799 images.
+* The size of the validation set is 4410 images.
+* The size of test set is 12630 images.
+* The shape of a traffic sign image is 32x32x3. This means that each picture is 32 pixels wide, 32 pixels tall, and has 3 color channels.
+* The number of unique classes/labels in the data set is 43.
