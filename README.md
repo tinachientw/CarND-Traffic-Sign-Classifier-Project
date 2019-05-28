@@ -66,7 +66,7 @@ Design and Test a Model Architecture
 ---
 __1. Image preprocessing.__
 * Normalization:
-Normalizing all pictures  by substracting mean value and dividing by the standard deviation of the mean value. This normalization was performed for each of 3 of the color channels. (This approach was inspired by the [VGG16](https://arxiv.org/pdf/1409.1556.pdf) paper)
+Normalizing all pictures  by substracting mean value and dividing by the standard deviation of the mean value. This normalization was performed for each of 3 of the color channels. (This approach was inspired by the [VGG19](https://arxiv.org/pdf/1409.1556.pdf) paper)
 An important consideration was data leakage, so the mean and SD values used for all normalization were calculated only based on the training data set, and not validation or test data.
 
 * Augmentation:
@@ -90,9 +90,9 @@ __LeNet-5 Model Architecture__
 
 <img src="./examples/LeNet-Lab-Solution.png">
 
-The first layer is quite interesting, in my opinion. It has 3 1x1 convolution channels. What this allows to do is for the network to learn "the best" color channel combination. I originally saw this in VGG19 paper, but then read online that many people use it. It turns out that original RGB color scheme sometimes is not the best for deep learning and we can make a network learn for itself what the most efficient combination of RGB channels. This can improve accuracy.
+As described in VGG19, the network learn the best color channel combination by having 3 1X1 convolution chanels in first layer. The original RGB color scheme sometimes is not the best for deep learing. We can make a network learn from itself, this can also improve accuracy.
 
-Another point of attention should be max pooling layers. The first convolutional layer (1x1 doesn't count) doesn't have max pooling, whereas the other two do have 2x2 max pooling. You may ask why, and the answer has to do with dimesionality reduction. Had I used max pooling after first layer, the output from which has 30x30 spacial dimansion, and after max pooling that would be 15x15, which after next convolutional layer would be 13x13, at which point 2x2 max pooling cannot be applied. This means I needed to plan convolutional and max pooling layers in such a fashion that all corresponding input-output spacial dimensions are even number of pixels.
+About max pooling layers, the first convolutional layer (1x1 doesn't count) doesn't have max pooling, whereas the other two do have 2x2 max pooling. You may ask why, and the answer has to do with dimesionality reduction. Had I used max pooling after first layer, the output from which has 30x30 spacial dimansion, and after max pooling that would be 15x15, which after next convolutional layer would be 13x13, at which point 2x2 max pooling cannot be applied. This means I needed to plan convolutional and max pooling layers in such a fashion that all corresponding input-output spacial dimensions are even number of pixels.
 
 After training the model, the results of LeNet-5 were:
 - training set accuracy of 0.959
@@ -126,17 +126,19 @@ I implemented the ConvNet model from their traffic sign classifier paper and saw
 |Fully connected layer | 800 in, 43 out|
 
 __3. Training the model.__
+
 To train the model, I made the following decisions:
 
 * Adam optimizer. Adam optimizer uses adaptive decrease of the learning rate. It is quite useful, as it allows the optimizing algorithm to slow down as it approaches solution.
 * Starting learning rate of 0.0009. This choice was motivated by trial and error and also by looking at what practitioners use for this type of optimizer.
 * Batch size of 32. My memory wasn't big enough. I was getting out of memory errors when trying to make this value larger, so I decided to stop at 32.
 * Number of epochs was 201. Since one epoch trained relatively fast (13 seconds on average), I could afford to run it for longer and see if it converges to some value (which it did).
+* Use Numba, a JIT compiler, to make Python code fast.
 
 
 __4. Finding the final solution.__
-In the graph below, the blue line represents training accuracy and the orange line represents validation accuracy. In the beginning of the training, validation accuracy is higher than training accuracy. This is the result of using dropout. This reduces training accuracy and prevents overfitting. Using dropout additionally reduces the gap between training and validation accuracy, which is good. On the downside, training requires more epochs to converge.
 
+In the graph below, the blue line represents training accuracy and the orange line represents validation accuracy. In the beginning of the training, validation accuracy is higher than training accuracy. This is the result of using dropout. This reduces training accuracy and prevents overfitting. Using dropout additionally reduces the gap between training and validation accuracy, which is good. On the downside, training requires more epochs to converge.
 
 <img src="./visualizations/training.png">
 
@@ -151,3 +153,33 @@ During this project, I have tried some architectures and encountered numerous ch
 In the begining, I tried the LeNet architecture. I chose it because, both MNIST digits data set and traffic signs are similar in complexity. Both have simple fatures that distinguish classes. But the accuracy is not as high as I expected and the runing time is long due to my GPU is not fast enough.
 
 Then I tried the ConvNet architecture which is also LeCun's model. The main reason is the images were grayscale. This worked well for Sermanet and LeCun as described in their traffic sign classification article. It also helps to reduce training time, which was nice when my GPU was slow. The classes of Tensorflow and LeNet labs help a lot when I have to use rial and error approach. Beside this, the Deep Learing course of Andrew Ng helped me to tune the hyperparameters to get a good level of validation accuracy.
+
+Test a Model on New Images
+---
+__1. New German traffic signs.__
+
+Here are 12 German traffic signs that I found on the web:
+
+<img src="./visualizations/new_img.png">
+
+__2. Model's predictions on the new traffic signs.__
+
+All the photos should be distinguished easily, cause none of them were taken in low light conditions. And the result is as good as I expected, with 100% accuracy. This is a good sign as the model performs well on real-world data. But we can assume that the accuracy could not remain so high by given more data points if the image isn't as bright as the new images.
+
+__3. Softmax probabilities for all new signs.__
+
+Results can be seen in the figure below.
+
+<img src="./visualizations/top3_img.png">
+
+<img src="./visualizations/top5.png">
+
+__4 (Optional): Visualize the Neural Network's State with Test Images__
+
+-Featuremap of conv1 Layer, the shape of this layer is 14x14x6 and this featuremap is for stop sign at the next Intersection sign class.
+
+-Featuremap for Pooling layer which is having output shape of 14x14x6.
+<img src="./visualizations/FeatureMap_14x14x6.png">
+
+-Featuremap for Pooling layer which is having output shape of 5x5x16.
+<img src="./visualizations/FeatureMap_5x5x6.png">
