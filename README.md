@@ -36,8 +36,9 @@ Matplotlib
 Pandas (Optional)
 Run this command at the terminal prompt to install OpenCV. Useful for image processing:
 
-'''conda install -c https://conda.anaconda.org/menpo opencv3
-
+'''
+conda install -c https://conda.anaconda.org/menpo opencv3
+'''
 
 Data Set Summary & Exploration
 ---
